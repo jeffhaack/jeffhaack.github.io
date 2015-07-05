@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Toggling baselayers</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #links { position: absolute; bottom: 30px; left: 30px; z-index: 1; width: 150px; padding: 5px; background-color: white; font-size: 0.9em;}
+</style>
+</head>
+<body>
+<style>
+    body { margin: 0; padding: 0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+
+<div id='map'></div>
+
+<div id='links'>
+<a href='/'>Download 2010 Imagery</a><br/>
+<a href='/'>Download 2015 Imagery</a><br/>
+
+</div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiamVmZmhhYWNrIiwiYSI6IkdDU3MtVUUifQ.KJXO-ax2PqnBdfc1g_0ZfQ';
+  var map = L.mapbox.map('map', null, {
+      maxZoom: 18
+  }).setView([43.04372,42.72495], 16);
+
+  var layers = {
+      Balloon2010: L.mapbox.tileLayer('mapbox.satellite,jeffhaack.4aqq6w29'),
+      Drone2015: L.mapbox.tileLayer('mapbox.satellite,jeffhaack.8q4r6bt9')
+  };
+
+  layers.Drone2015.addTo(map);
+  L.control.layers(layers, null, {collapsed: false}).addTo(map);
+</script>
+</body>
+</html>
